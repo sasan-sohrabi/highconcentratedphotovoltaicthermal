@@ -1,4 +1,5 @@
 import numpy as np
+# There is problem in running code!!!
 
 def micro22(C, I, eta_ref, cof_tem, T_in, nc):
     # Material and geometric properties
