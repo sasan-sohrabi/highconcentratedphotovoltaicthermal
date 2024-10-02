@@ -45,6 +45,10 @@ def micro22(C, I, eta_ref, cof_tem, T_in, nc):
         Q_a = 2 * mdot * cp * T_in
         Re = (mdot * Dhc) / (y * w * u)
 
+        # Debugging print statements
+        print("Re:", Re)
+        print("Pr:", Pr)
+
         # Friction factor (F) and Nusselt number (Nu)
         F = 0.316 * Re**-0.25 if Re <= 20000 else 0.184 * Re**-0.2
         if Re <= 2300:
@@ -75,6 +79,10 @@ def micro22(C, I, eta_ref, cof_tem, T_in, nc):
             [0, 0, 0, h * z * y + 0.5 * h * z * y - 2 * h * z * th_fin,
              -2 * mdot * cp - h * z * w - h * z * y + 2 * h * z * th_fin]
         ])
+
+        for row in A:
+            print(row)
+
         B = np.array([(1 - eta_ref + cof_tem * 298) * Q_inc, 0, 0, 0, -Q_a])
 
         # Solve the system of equations
