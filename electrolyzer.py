@@ -1,14 +1,20 @@
-def electrolyzer_simulation(electricity_available, water_available, water_needed_per_kg_h2=9,
-                            electricity_needed_per_kg_h2=50, blowdown_fraction=0.1):
+def electrolyzer_simulation_with_efficiency(electricity_available, water_available, water_needed_per_kg_h2=9, LHV=33.33,
+                                            efficiency=0.75, X_ST=0.9):
     """
-    Simulate the electrolyzer's hydrogen production, water consumption, and electricity usage.
+    Simulate the electrolyzer's hydrogen production, water consumption, and electricity usage based on efficiency.
     :param electricity_available: Total electricity available for the electrolyzer (kWh).
     :param water_available: Total water available for the electrolyzer (kg).
     :param water_needed_per_kg_h2: Amount of water needed to produce 1 kg of hydrogen (kg).
-    :param electricity_needed_per_kg_h2: Amount of electricity needed to produce 1 kg of hydrogen (kWh).
-    :param blowdown_fraction: Fraction of water returned as blowdown.
+    :param LHV: Lower Heating Value of hydrogen (kWh/kg).
+    :param efficiency: Efficiency of the electrolyzer (fraction between 0 and 1).
+    :param X_ST: Water utilization factor (the efficiency with which water is converted into hydrogen).
     :return: Hydrogen produced (kg), water consumed (kg), blowdown water (kg), electricity used (kWh).
     """
+    # Calculate the electricity needed per kg of hydrogen based on efficiency
+    electricity_needed_per_kg_h2 = LHV / efficiency
+
+    # Blowdown fraction derived from the water utilization factor
+    blowdown_fraction = 1 - X_ST
 
     # Maximum hydrogen production limited by either electricity or water
     max_h2_from_electricity = electricity_available / electricity_needed_per_kg_h2  # kg of hydrogen producible
@@ -33,11 +39,12 @@ def electrolyzer_simulation(electricity_available, water_available, water_needed
     }
 
 
-# Example usage of the electrolyzer simulation
+# Example usage of the electrolyzer simulation with efficiency
 electricity_available = 1000  # kWh
 water_available = 500  # kg
 
-electrolyzer_results = electrolyzer_simulation(electricity_available, water_available)
+# Electrolyzer with 75% efficiency
+electrolyzer_results = electrolyzer_simulation_with_efficiency(electricity_available, water_available, efficiency=0.75)
 
 # Output results
 print(f"Hydrogen produced: {electrolyzer_results['hydrogen_produced']:.2f} kg")
