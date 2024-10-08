@@ -1,4 +1,4 @@
-def pv_panels_simulation(irradiance, ambient_temp, rated_power_pv, gamma_pv_p, irradiance_stc=1000, theta_stc=25, theta_noct=45, ambient_noct=20, irradiance_noct=800):
+def pv_panels_simulation(irradiance, ambient_temp, rated_power_pv, gamma_pv_p, irradiance_stc=1000, theta_stc=25, theta_noct=40, ambient_noct=20, irradiance_noct=800):
     """
     Simulate the power output of the PV panels based on irradiance and temperature.
     :param irradiance: The irradiance at the current time (W/m²).
@@ -23,9 +23,9 @@ def pv_panels_simulation(irradiance, ambient_temp, rated_power_pv, gamma_pv_p, i
 
 # Example usage of the PV simulation
 irradiance = 1000  # W/m² (current irradiance)
-ambient_temp = 20  # °C (current ambient temperature)
+ambient_temp = 25  # °C (current ambient temperature)
 rated_power_pv = 10  # kW (rated power of PV system)
-gamma_pv_p = -0.5  # %/°C (temperature coefficient of PV panels)
+gamma_pv_p = -0.35  # %/°C (temperature coefficient of PV panels)
 
 # Simulate the PV panel power output
 pv_power_output = pv_panels_simulation(irradiance, ambient_temp, rated_power_pv, gamma_pv_p)
