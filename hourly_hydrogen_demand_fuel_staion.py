@@ -1,3 +1,6 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
 def monthly_scaling_factors():
     """
     :return: List of scaling factors for each month.
@@ -71,4 +74,18 @@ def hydrogen_demand_profile_8760():
         hourly_demand.append(5)  # Assume holiday demand (very low)
 
     return hourly_demand
+
+hourly_demand = hydrogen_demand_profile_8760()
+
+# Plot the hydrogen demand for the first 720 hours (first month)
+plt.figure(figsize=(10, 6))
+plt.plot(hourly_demand, label='Hydrogen Demand (First Month)')
+plt.xlabel('Hour')
+plt.ylabel('Hydrogen Demand (kg)')
+plt.title('Hydrogen Demand Profile for the First Month (720 Hours)')
+plt.grid(True)
+plt.legend()
+plt.savefig("demand")
+plt.show()
+
 

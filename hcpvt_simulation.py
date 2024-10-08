@@ -1,6 +1,6 @@
 import numpy as np
 
-def micro_channel_simulation(C, I, eta_ref, cof_tem, T_in, nc=12):
+def hcpvt_simulation(C, I, eta_ref, cof_tem, T_in, nc=12):
     # Constants
     k_cell = 138            # Thermal conductivity of cell (W/mK)
     th_cell = 0.000102      # Thickness of cell (m)
@@ -181,5 +181,5 @@ def micro_channel_simulation(C, I, eta_ref, cof_tem, T_in, nc=12):
     }
 
 # Example usage
-results = micro_channel_simulation(C=1100, I=1000, eta_ref=0.322, cof_tem=0.0007, T_in=357)
+results = hcpvt_simulation(C=1100, I=1000, eta_ref=0.322, cof_tem=0.0007, T_in=357)
 print(results)
