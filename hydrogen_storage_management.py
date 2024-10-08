@@ -1,4 +1,4 @@
-def hydrogen_tank_simulation_for_hour(t, hourly_hydrogen_production, hourly_hydrogen_demand, hydrogen_storage,
+def hydrogen_tank_simulation_for_hour(hour, hourly_hydrogen_production, hourly_hydrogen_demand, hydrogen_storage,
                                       max_tank_capacity):
     """
     Simulate hydrogen storage for a given hour, handling hydrogen production, storage, and consumption.
@@ -10,7 +10,7 @@ def hydrogen_tank_simulation_for_hour(t, hourly_hydrogen_production, hourly_hydr
 
     The maximum storage capacity condition is also applied at every step.
 
-    :param t: Current hour number of the year (from 0 to 8760).
+    :param hour: Current hour number of the year (from 0 to 8760)
     :param hourly_hydrogen_production: Hydrogen production at hour t (kg).
     :param hourly_hydrogen_demand: Hydrogen demand at hour t (kg).
     :param hydrogen_storage: Current amount of hydrogen in the tank (kg).
@@ -18,8 +18,8 @@ def hydrogen_tank_simulation_for_hour(t, hourly_hydrogen_production, hourly_hydr
     :return: A dictionary with updated hydrogen storage, unmet demand, and hydrogen supplied for the current hour.
     """
 
-    day = t // 24 + 1  # Track the day number (1 to 365)
-    hour_of_day = t % 24  # Track the hour of the day (0-23)
+    day = hour // 24 + 1  # Track the day number (1 to 365)
+    hour_of_day = hour % 24  # Track the hour of the day (0-23)
 
     hydrogen_supplied = 0
     unmet_hydrogen_demand = 0
