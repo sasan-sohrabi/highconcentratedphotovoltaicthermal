@@ -1,53 +1,37 @@
-def electrolyzer_simulation_with_efficiency(electricity_available, water_available, water_needed_per_kg_h2=9, LHV=33.33,
-                                            efficiency=0.75, X_ST=0.9):
+def electrolyzer_simulation_calculate_requirements(hydrogen_demand, efficiency_ez=0.75, LHV=33.33, water_needed_per_kg_h2=9, X_ST=0.9):
     """
-    Simulate the electrolyzer's hydrogen production, water consumption, and electricity usage based on efficiency.
-    :param electricity_available: Total electricity available for the electrolyzer (kWh).
-    :param water_available: Total water available for the electrolyzer (kg).
-    :param water_needed_per_kg_h2: Amount of water needed to produce 1 kg of hydrogen (kg).
+    Simulate the electrolyzer to calculate electricity and water needed to meet the hydrogen demand.
+    :param hydrogen_demand: The hydrogen demand for the current hour (kg).
+    :param efficiency_ez: Efficiency of the electrolyzer (fraction between 0 and 1).
     :param LHV: Lower Heating Value of hydrogen (kWh/kg).
-    :param efficiency: Efficiency of the electrolyzer (fraction between 0 and 1).
+    :param water_needed_per_kg_h2: Amount of water needed to produce 1 kg of hydrogen (kg).
     :param X_ST: Water utilization factor (the efficiency with which water is converted into hydrogen).
-    :return: Hydrogen produced (kg), water consumed (kg), blowdown water (kg), electricity used (kWh).
+    :return: A dictionary with electricity needed, water needed, and hydrogen produced.
     """
-    # Calculate the electricity needed per kg of hydrogen based on efficiency
-    electricity_needed_per_kg_h2 = LHV / efficiency
 
-    # Blowdown fraction derived from the water utilization factor
-    blowdown_fraction = 1 - X_ST
+    # Calculate how much electricity is needed to produce the hydrogen demand
+    electricity_needed_per_kg_h2 = LHV / efficiency_ez
+    total_electricity_needed = hydrogen_demand * electricity_needed_per_kg_h2
 
-    # Maximum hydrogen production limited by either electricity or water
-    max_h2_from_electricity = electricity_available / electricity_needed_per_kg_h2  # kg of hydrogen producible
-    max_h2_from_water = water_available / water_needed_per_kg_h2  # kg of hydrogen producible
+    # Calculate how much water is needed to produce the hydrogen demand
+    total_water_needed = hydrogen_demand * water_needed_per_kg_h2
 
-    # Hydrogen production is limited by the smaller of the two
-    hydrogen_produced = min(max_h2_from_electricity, max_h2_from_water)
+    # Calculate the blowdown water (water returned to the system)
+    blowdown_water = total_water_needed * (1 - X_ST)
 
-    # Calculate the water and electricity consumption based on hydrogen production
-    water_consumed = hydrogen_produced * water_needed_per_kg_h2
-    electricity_used = hydrogen_produced * electricity_needed_per_kg_h2
-
-    # Calculate blowdown water (water returned to the system)
-    blowdown_water = water_consumed * blowdown_fraction
-
-    # Return the results
     return {
-        'hydrogen_produced': hydrogen_produced,
-        'water_consumed': water_consumed,
-        'blowdown_water': blowdown_water,
-        'electricity_used': electricity_used
+        'hydrogen_produced': hydrogen_demand,
+        'electricity_needed': total_electricity_needed,
+        'water_needed': total_water_needed,
+        'blowdown_water': blowdown_water
     }
 
-
-# Example usage of the electrolyzer simulation with efficiency
-electricity_available = 1000  # kWh
-water_available = 500  # kg
-
-# Electrolyzer with 75% efficiency
-electrolyzer_results = electrolyzer_simulation_with_efficiency(electricity_available, water_available, efficiency=0.75)
+# Example usage of the electrolyzer simulation
+hydrogen_demand = 50  # kg (hydrogen demand for the current hour)
+electrolyzer_results = electrolyzer_simulation_calculate_requirements(hydrogen_demand)
 
 # Output results
 print(f"Hydrogen produced: {electrolyzer_results['hydrogen_produced']:.2f} kg")
-print(f"Water consumed: {electrolyzer_results['water_consumed']:.2f} kg")
+print(f"Electricity needed: {electrolyzer_results['electricity_needed']:.2f} kWh")
+print(f"Water needed: {electrolyzer_results['water_needed']:.2f} kg")
 print(f"Blowdown water: {electrolyzer_results['blowdown_water']:.2f} kg")
-print(f"Electricity used: {electrolyzer_results['electricity_used']:.2f} kWh")
