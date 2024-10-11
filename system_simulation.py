@@ -1,12 +1,12 @@
-from electrolyzer import electrolyzer
-from fuel_cell import fuel_cell
-from hcpvt_simulation import hcpvt_simulation
-from hourly_hydrogen_demand_fuel_staion import hydrogen_demand_profile_8760
-from hydrogen_storage_management import hydrogen_storage_management
-from med_desalination import med_desalination
-from on_grid_electricity_management import on_grid_electricity_management
-from pv_panels_simulation import pv_panels_simulation
-from water_tank_management import water_tank_management
+from water_mangment.electrolyzer import electrolyzer
+from water_mangment.fuel_cell import fuel_cell
+from electricity_and_heat_production.hcpvt_simulation import hcpvt_simulation
+from hydrogen_demand_calculation.hourly_hydrogen_demand_fuel_staion import hydrogen_demand_profile_8760
+from hydrogen_production.hydrogen_storage_management import hydrogen_storage_management
+from water_mangment.med_desalination import med_desalination
+from electricity_and_heat_production.on_grid_electricity_management import on_grid_electricity_management
+from electricity_and_heat_production.pv_panels_simulation import pv_panels_simulation
+from water_mangment.water_tank_management import water_tank_management
 
 
 def simulate_system_for_year(C, I, eta_ref, cof_tem, T_in_hcpvt, nc=12, max_water_storage=500,
