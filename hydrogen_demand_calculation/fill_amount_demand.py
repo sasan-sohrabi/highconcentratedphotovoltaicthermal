@@ -1,6 +1,10 @@
 import numpy as np
 from scipy.stats import gaussian_kde, ks_2samp
 import pandas as pd
+import matplotlib.pyplot as plt
+
+# Set a seed for reproducibility
+np.random.seed(42)
 
 # Real data provided
 real_data = [2, 3, 3.4, 3.6, 4, 4.2, 5]
@@ -8,12 +12,12 @@ real_data = [2, 3, 3.4, 3.6, 4, 4.2, 5]
 # Step 1: Perform Kernel Density Estimation (KDE) for the real data
 kde_real = gaussian_kde(real_data)
 
-# Step 2: Generate uniform random samples
+# Step 2: Generate uniform random samples (using the fixed seed)
 uniform_random_samples = np.random.uniform(0, 1, len(real_data))
 
 # Step 3: Create a range of values for KDE evaluation and calculate the CDF
 x_range = np.linspace(min(real_data) - 1, max(real_data) + 1, 1000)
-cdf_real = np.cumsum(kde_real(x_range))  # Approximate the CDF using KDE
+cdf_real = np.cumsum(kde_real(x_range))
 
 # Normalize the CDF to be between 0 and 1
 cdf_real /= cdf_real[-1]
@@ -34,3 +38,12 @@ comparison_kde = pd.DataFrame({
 print(comparison_kde)
 print("KS Statistic:", statistic)
 print("P-Value:", p_value)
+
+# Optional: Plot the real vs simulated data
+plt.hist(real_data, bins=10, alpha=0.5, label="Real Data")
+plt.hist(simulated_data_kde, bins=10, alpha=0.5, label="Simulated Data (KDE)")
+plt.legend()
+plt.title("Real vs Simulated Data")
+plt.xlabel("Values")
+plt.ylabel("Frequency")
+plt.show()
