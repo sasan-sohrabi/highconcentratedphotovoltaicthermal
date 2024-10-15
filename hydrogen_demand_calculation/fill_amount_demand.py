@@ -16,7 +16,7 @@ kde_real = gaussian_kde(real_data)
 uniform_random_samples = np.random.uniform(0, 1, len(real_data))
 
 # Step 3: Create a range of values for KDE evaluation and calculate the CDF
-x_range = np.linspace(min(real_data) - 1, max(real_data) + 1, 1000)
+x_range = np.linspace(min(real_data) - 1, max(real_data) + 1, 7)
 cdf_real = np.cumsum(kde_real(x_range))
 
 # Normalize the CDF to be between 0 and 1

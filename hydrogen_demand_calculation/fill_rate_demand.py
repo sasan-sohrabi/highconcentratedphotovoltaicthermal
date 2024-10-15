@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 
 # Step 1: Define the parameters of the normal distribution
 mu = 0.9  # Mean fill rate (kg/min)
-sigma = 0.1  # Standard deviation (kg/min)
+sigma = 0.33 # Standard deviation (kg/min)
 
 # Step 2: Generate 1000 random fill rates based on the normal distribution
 random_fill_rates = np.random.normal(mu, sigma, 1000)
@@ -25,4 +25,5 @@ plt.plot(x, p, 'k', linewidth=2)
 plt.title("Probability Density of Hydrogen Fill Rates")
 plt.xlabel("Fill Rate (kg/min)")
 plt.ylabel("Probability Density")
+plt.savefig("fill_rate")
 plt.show()
