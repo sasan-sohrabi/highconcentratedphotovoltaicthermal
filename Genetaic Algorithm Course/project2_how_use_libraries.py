@@ -26,8 +26,17 @@ def fitness_function(solution):
              + 12 * x3) + penalty  # Negative the objective function for maximization and apply penalty
 
 
+algorithm_parameters = {'max_num_iteration': None,
+                        'population_size': 100,
+                        'crossover_probability': 0.5,
+                        'mutation_probability': 0.5,
+                        'elit_ratio': 0.01,
+                        'parents_portion': 0.3,
+                        'crossover_type': 'uniform',
+                        'max_iteration_without_improv': None}
+
 # Create an instance of the Ga solver
 
-model = ga(function=fitness_function, dimension=3, variable_type='bool')
+model = ga(function=fitness_function, dimension=3, variable_type='bool', algorithm_parameters=algorithm_parameters)
 
 model.run()
