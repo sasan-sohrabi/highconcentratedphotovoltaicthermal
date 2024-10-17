@@ -23,18 +23,17 @@ x1, x2 ≥ 0
 """
 
 # The libraries
-import numpy as np
 import random
 import matplotlib.pyplot as plt
 
 
-# Second step: Define the objective function and the constrains
+# Second step: Define the objective function and the constraints
 # The objective function
 def objective_function(x1, x2):
     return 4 * x1 + 3 * x2
 
 
-# The constrains
+# The constraints
 def constrains1(x1, x2):
     return x1 + x2 <= 40
 
@@ -112,5 +111,6 @@ def genetic_algorithm(population_size, num_generation):
     plt.show()
 
     return best_solution, best_fitness
+
 
 genetic_algorithm(20, 10)
