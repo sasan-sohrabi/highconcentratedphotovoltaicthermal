@@ -17,7 +17,14 @@ S.t.
 # Import relevant libraries
 import numpy as np
 from pymoo.core.problem import ElementwiseProblem
-from pymoo.docs import algorithms
+from pymoo.algorithms.moo.nsga2 import NSGA2
+from pymoo.operators.sampling.rnd import FloatRandomSampling
+from pymoo.operators.crossover.sbx import SBX
+from pymoo.operators.mutation.pm import PM
+from pymoo.config import Config
+from pymoo.termination import get_termination
+from pymoo.optimize import minimize
+from pymoo.visualization.scatter import Scatter
 
 
 # Develop the class for define problem
@@ -45,13 +52,6 @@ class MyProblem(ElementwiseProblem):
 problem = MyProblem()
 
 # Initializing the Algorithm
-from pymoo.algorithms.moo.nsga2 import NSGA2
-from pymoo.operators.sampling.rnd import FloatRandomSampling
-from pymoo.operators.crossover.sbx import SBX
-from pymoo.operators.mutation.pm import PM
-from pymoo.config import Config
-
-
 Config.warnings['not_compiled'] = False
 
 algorithm = NSGA2(
@@ -64,12 +64,9 @@ algorithm = NSGA2(
 
 )
 
-from pymoo.termination import get_termination
 termination = get_termination("n_gen", 100)
 
 #  Optimization Process
-from pymoo.optimize import minimize
-
 res = minimize(problem,
                algorithm,
                termination,
@@ -85,7 +82,6 @@ print("\n---------\n")
 F = res.F
 print(F)
 
-from pymoo.visualization.scatter import Scatter
 plot = Scatter(title = "Three Variables Solutions")
 plot.add(F, color="red")
 plot.show()
