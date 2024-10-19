@@ -17,6 +17,8 @@ S.t.
 # Import relevant libraries
 import numpy as np
 from pymoo.core.problem import ElementwiseProblem
+from pymoo.docs import algorithms
+
 
 # Develop the class for define problem
 class MyProblem(ElementwiseProblem):
@@ -41,3 +43,27 @@ class MyProblem(ElementwiseProblem):
         out["G"] = [g1, g2]
 
 problem = MyProblem()
+
+# Initializing the Algorithm
+from pymoo.algorithms.moo.nsga2 import NSGA2
+from pymoo.operators.sampling.rnd import FloatRandomSampling
+from pymoo.operators.crossover.sbx import SBX
+from pymoo.operators.mutation.pm import PM
+from pymoo.config import Config
+
+
+Config.warnings['not_compiled'] = False
+
+algorithm = NSGA2(
+    pop_size = 50,
+    n_offsprings = 10,
+    sampling = FloatRandomSampling(),
+    crossover = SBX(prob = 0.9, eta = 20),
+    mutation = PM(eta = 25),
+    eliminate_duplicates = True,
+
+)
+
+from pymoo.termination import get_termination
+termination = get_termination("n_gen", 100)
+
