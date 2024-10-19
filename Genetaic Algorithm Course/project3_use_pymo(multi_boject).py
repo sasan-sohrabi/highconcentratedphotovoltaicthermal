@@ -34,7 +34,7 @@ class MyProblem(ElementwiseProblem):
     def _evaluate(self, x, out, *args, **kwargs):
 
         f1 = x[0]**2 + x[1]**2 + x[2]**2
-        f2 = -(x[0]-1)**2 - (x[1]-4)**2 - (x[2]-3)**2
+        f2 = (x[0]-1)**2 + (x[1]-4)**2 + (x[2]-3)**2
 
         g1 = x[0] + x[1] - x[2] - 1
         g2 = -3 * x[0] + x[1] + x[2] - 4
@@ -66,4 +66,27 @@ algorithm = NSGA2(
 
 from pymoo.termination import get_termination
 termination = get_termination("n_gen", 100)
+
+#  Optimization Process
+from pymoo.optimize import minimize
+
+res = minimize(problem,
+               algorithm,
+               termination,
+               seed = 7,
+               save_history=True,
+               verbose=True,
+               )
+
+# Result and Visualization
+X = res.X
+print(X)
+print("\n---------\n")
+F = res.F
+print(F)
+
+from pymoo.visualization.scatter import Scatter
+plot = Scatter(title = "Three Variables Solutions")
+plot.add(F, color="red")
+plot.show()
 
