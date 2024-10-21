@@ -91,4 +91,27 @@ nadir_point = F.max(axis=0)
 print("ideal point: ", ideal_point)
 print("nadir point: ", nadir_point)
 
+import matplotlib.pyplot as plt
+plt.figure(figsize=(8,6))
+plt.scatter(F[:, 0], F[:, 1], s=50, facecolor='none', edgecolors='green')
+plt.scatter(ideal_point[0], ideal_point[1], facecolor='none', edgecolors='red', marker='*', s=100)
+plt.scatter(nadir_point[0], nadir_point[1], facecolor='none', edgecolors='black', marker='p', s=100)
+plt.title('Objective Space with Ideal and Nadir Points')
+plot.show()
+
+# Normalization to prepare for MCDM
+nF = (F - ideal_point) / (nadir_point - ideal_point)
+print("Normalize amount of F is : ", nF )
+
+fl = nF.min(axis=0)
+fu = nF.max(axis=0)
+
+print(f"Scale f1: [{fl[0]},{fu[0]}]")
+print(f"Scale f2: [{fl[1]},{fu[1]}]")
+
+plt.figure(figsize=(8,6))
+plt.scatter(nF[:, 0], nF[:, 1], s=50, facecolor='none', edgecolors='green')
+plt.title('Normalize Objective Vector')
+plot.show()
+
 
