@@ -5,7 +5,7 @@ Objectives:
 2- max f2(x) = -(x1-1)^2 - (x2-4)^2 - (x3-3)^2
 
 S.t.
-
+ 
 1- g1(x): x1 + x2 - x3 <= 1
 2- g2(x): 3 * x1 - x2 - x3 >= 4
 3- -10 <= x1 <= 10
@@ -69,7 +69,7 @@ termination = get_termination("n_gen", 100)
 res = minimize(problem,
                algorithm,
                termination,
-               seed=7,
+               seed=5,
                save_history=True,
                verbose=True,
                )
@@ -114,4 +114,19 @@ plt.scatter(nF[:, 0], nF[:, 1], s=50, facecolor='none', edgecolors='green')
 plt.title('Normalize Objective Vector')
 plot.show()
 
+#Compromise Programming
+from pymoo.decomposition.asf import ASF
+decomp = ASF()
+
+Weights = np.array([0.2, 0.8])
+opt_index = decomp.do(nF, 1/Weights).argmin()
+print(f"Best ASF: \n Opt_index = {opt_index} \n F = {F[opt_index]}")
+
+plt.figure(figsize=(8,6))
+plt.scatter(F[:, 0], F[:, 1], s=50, facecolor='none', edgecolors='green')
+plt.scatter(F[opt_index, 0], F[opt_index,1], marker='x', color='red', s=100)
+plt.show()
+
+X_Optimum = X[opt_index, :]
+print(X_Optimum)
 
