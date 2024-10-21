@@ -130,3 +130,15 @@ plt.show()
 X_Optimum = X[opt_index, :]
 print(X_Optimum)
 
+# Pseudo_Weights
+from pymoo.mcdm.pseudo_weights import PseudoWeights
+Weights = np.array([0.2, 0.8])
+Opt_Index2 = PseudoWeights(Weights).do(nF)
+print(f"Best Pseudo Weights: \n Opt_index = {Opt_Index2} \n F = {F[Opt_Index2]}")
+
+plt.figure(figsize=(8,6))
+plt.scatter(F[:, 0], F[:, 1], s=50, facecolor='none', edgecolors='green')
+plt.scatter(F[Opt_Index2, 0], F[Opt_Index2,1], marker='x', color='red', s=100)
+plt.show()
+
+
