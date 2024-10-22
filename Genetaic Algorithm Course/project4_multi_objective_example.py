@@ -38,9 +38,9 @@ class MyProblem(ElementwiseProblem):
                          xu=np.array([4, 8]))
 
     def _evaluate(self, x, out, *args, **kwargs):
-        f1 = x[0] + 3 *x[1]
-        f2 = -3 * x[0] + x[1]
-        f3 = x[0] - x[1]
+        f1 = -x[0] - 3 *x[1]
+        f2 = 3 * x[0] - x[1]
+        f3 = -x[0] + x[1]
 
         g1 = 2 * x[0] + x[1]  - 8
         g2 = x[0] + 2 * x[1]  - 10
@@ -70,7 +70,7 @@ termination = get_termination("n_gen", 1000)
 res = minimize(problem,
                algorithm,
                termination,
-               seed=5,
+               seed=7,
                save_history=True,
                verbose=True,
                )
@@ -123,7 +123,7 @@ plot.show()
 from pymoo.decomposition.asf import ASF
 decomp = ASF()
 
-Weights = np.array([0.2, 0.6, 0.2])
+Weights = np.array([0.6, 0.2, 0.2])
 opt_index = decomp.do(nF, 1/Weights).argmin()
 print(f"Best ASF: \n Opt_index = {opt_index} \n F = {F[opt_index]}")
 
