@@ -127,7 +127,7 @@ Weights = np.array([0.6, 0.2, 0.2])
 opt_index = decomp.do(nF, 1/Weights).argmin()
 print(f"Best ASF: \n Opt_index = {opt_index} \n F = {F[opt_index]}")
 
-
+# Plot the result
 ax.scatter(F[opt_index, 0], F[opt_index, 1], F[opt_index, 2], s=50, c='red', marker='o')
 plt.show()
 
