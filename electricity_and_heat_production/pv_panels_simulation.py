@@ -1,5 +1,5 @@
-def pv_panels_simulation(irradiance, ambient_temp, rated_power_pv, gamma_pv_p, wind_speed,
-                         irradiance_stc=1000, theta_stc=25, theta_noct=40, ambient_noct=20,
+def pv_panels_simulation(irradiance, ambient_temp, wind_speed, rated_power_pv=500, gamma_pv_p=-0.35,
+                         irradiance_stc=1000, theta_stc=25, theta_noct=45, ambient_noct=20,
                          irradiance_noct=800, k=0.05):
     """
     Simulate the power output of the PV panels based on irradiance, temperature, and wind speed.
@@ -26,15 +26,15 @@ def pv_panels_simulation(irradiance, ambient_temp, rated_power_pv, gamma_pv_p, w
     return power_output
 
 
+"""
 # Example usage of the PV simulation with wind effect
 irradiance = 1000  # W/m² (current irradiance)
 ambient_temp = 25  # °C (current ambient temperature)
-rated_power_pv = 10  # kW (rated power of PV system)
-gamma_pv_p = -0.35  # %/°C (temperature coefficient of PV panels)
-wind_speed = 20  # m/s (current wind speed)
+wind_speed = 10  # m/s (current wind speed)
 
 # Simulate the PV panel power output with wind effect
-pv_power_output = pv_panels_simulation(irradiance, ambient_temp, rated_power_pv, gamma_pv_p, wind_speed)
+pv_power_output = pv_panels_simulation(irradiance, ambient_temp, wind_speed)
 
 # Output result
 print(f"PV power output with wind effect: {pv_power_output:.2f} kW")
+"""
