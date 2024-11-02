@@ -176,12 +176,14 @@ def hcpvt_simulation(C, I, eta_ref, cof_tem, T_in, nc=12):
         'eta_pv': eta_pv,
         'eta_el': eta_el,
         'eta_th': eta_th,
-        'P_el': P_el/1000,
-        'P_th': P_th/1000,
+        'P_el': P_el,
+        'P_th': P_th,
         'delta_p': delta_p
     }
 
 
+"""
 # Example usage
 results = hcpvt_simulation(C=1100, I=1000, eta_ref=0.322, cof_tem=0.0007, T_in=357)
 print(results)
+"""

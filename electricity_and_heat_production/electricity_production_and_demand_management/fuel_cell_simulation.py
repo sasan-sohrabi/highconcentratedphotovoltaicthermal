@@ -24,6 +24,7 @@ def fuel_cell_simulation(hydrogen_available, efficiency_fc=0.55, LHV=33.33, MW=1
     }
 
 
+"""
 # Example usage of the fuel cell simulation
 hydrogen_available = 10  # kg of hydrogen available for the fuel cell
 fuel_cell_results = fuel_cell_simulation(hydrogen_available)
@@ -31,3 +32,4 @@ fuel_cell_results = fuel_cell_simulation(hydrogen_available)
 # Output results
 print(f"Electricity produced: {fuel_cell_results['electricity_produced']:.2f} kWh")
 print(f"Water produced: {fuel_cell_results['water_produced']:.4f} kg")
+"""
