@@ -21,6 +21,7 @@ def natural_gas_required(mass_water, t1, t2, efficiency, energy_content_gas=10.5
     return natural_gas_volume
 
 
+"""
 # Example usage
 mass_water = 200  # kg (equivalent to 200 liters)
 t1 = 20  # Initial temperature (°C)
@@ -32,3 +33,4 @@ gas_needed = natural_gas_required(mass_water, t1, t2, efficiency)
 
 # Output result
 print(f"Natural gas required: {gas_needed:.2f} m³")
+"""
